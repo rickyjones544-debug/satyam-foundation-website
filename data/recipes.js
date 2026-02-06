@@ -27,7 +27,7 @@ export const recipes = [
     category: "main-course",
     prepTime: "45 mins",
     difficulty: "Medium",
-    image: "/images/mushroom-biryani.jpg",
+    image: "/images/07.png",
     description: "Fragrant and flavorful mushroom biryani, a perfect vegetarian alternative to traditional biryani.",
     ingredients: ["300g mixed mushrooms", "Basmati rice", "Biryani spices", "Yogurt", "Onions, tomatoes"],
     featured: false
@@ -38,7 +38,7 @@ export const recipes = [
     category: "appetizers",
     prepTime: "30 mins",
     difficulty: "Medium",
-    image: "/images/stuffed-mushrooms.jpg",
+    image: "/images/06.png",
     description: "Delicious mushrooms stuffed with herbs, cheese, and breadcrumbs. Perfect party appetizer.",
     ingredients: ["Large button mushrooms", "Cream cheese", "Breadcrumbs", "Fresh herbs", "Garlic"],
     featured: true
@@ -49,7 +49,7 @@ export const recipes = [
     category: "main-course",
     prepTime: "20 mins",
     difficulty: "Easy",
-    image: "/images/mushroom-pasta.jpg",
+    image: "/images/02.png",
     description: "Simple yet delicious pasta with sautéed mushrooms in a creamy garlic sauce.",
     ingredients: ["300g mixed mushrooms", "Pasta of choice", "Heavy cream", "Garlic", "Parmesan cheese"],
     featured: false
@@ -60,7 +60,7 @@ export const recipes = [
     category: "appetizers",
     prepTime: "40 mins",
     difficulty: "Medium",
-    image: "/images/mushroom-tikka.jpg",
+    image: "/images/01.png",
     description: "Spicy and flavorful mushroom tikka, marinated in traditional Indian spices and grilled to perfection.",
     ingredients: ["Button mushrooms", "Yogurt", "Tikka masala", "Lemon juice", "Spices"],
     featured: true
