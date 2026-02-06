@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <defs>
+    <linearGradient id="mapBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dcfce7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a7f3d0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#mapBg)"/>
+  
+  <!-- Map representation -->
+  <!-- Roads -->
+  <path d="M0 200 L600 200" stroke="#92400e" stroke-width="3" fill="none"/>
+  <path d="M300 0 L300 400" stroke="#92400e" stroke-width="3" fill="none"/>
+  <path d="M150 100 L450 300" stroke="#d97706" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+  
+  <!-- Location marker -->
+  <circle cx="300" cy="200" r="20" fill="#dc2626"/>
+  <circle cx="300" cy="200" r="15" fill="#ffffff"/>
+  <circle cx="300" cy="200" r="8" fill="#dc2626"/>
+  
+  <!-- Farm buildings -->
+  <rect x="280" y="180" width="15" height="20" fill="#16a34a"/>
+  <rect x="305" y="185" width="12" height="15" fill="#16a34a"/>
+  <rect x="290" y="210" width="20" height="10" fill="#854836"/>
+  
+  <!-- Trees/vegetation -->
+  <circle cx="250" cy="190" r="8" fill="#16a34a" opacity="0.7"/>
+  <circle cx="350" cy="180" r="6" fill="#16a34a" opacity="0.7"/>
+  <circle cx="320" cy="220" r="7" fill="#16a34a" opacity="0.7"/>
+  
+  <!-- North arrow -->
+  <path d="M300 30 L295 40 L300 25 L305 40 Z" fill="#dc2626"/>
+  <text x="300" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#dc2626">N</text>
+  
+  <!-- Location label -->
+  <rect x="240" y="240" width="120" height="30" rx="5" fill="#ffffff" stroke="#dc2626" stroke-width="2"/>
+  <text x="300" y="258" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#dc2626">SATYAM FOUNDATION</text>
+  
+  <!-- Address -->
+  <text x="300" y="290" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#451a03">Rampur, Patna</text>
+  <text x="300" y="305" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#451a03">Bihar, India - 801110</text>
+</svg>

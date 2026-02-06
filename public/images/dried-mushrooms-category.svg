@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <defs>
+    <linearGradient id="driedBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fde68a;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="driedCap">
+      <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#92400e;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#driedBg)"/>
+  
+  <!-- Dried mushrooms arrangement -->
+  <ellipse cx="150" cy="300" rx="40" ry="12" fill="#451a03" opacity="0.3"/>
+  <ellipse cx="150" cy="270" rx="35" ry="35" fill="url(#driedCap)"/>
+  <ellipse cx="150" cy="265" rx="25" ry="15" fill="#78350f"/>
+  
+  <!-- Texture lines -->
+  <path d="M120 265 Q150 260 180 265" stroke="#451a03" stroke-width="2" fill="none" opacity="0.6"/>
+  <path d="M120 275 Q150 270 180 275" stroke="#451a03" stroke-width="2" fill="none" opacity="0.6"/>
+  
+  <ellipse cx="300" cy="310" rx="38" ry="11" fill="#451a03" opacity="0.3"/>
+  <ellipse cx="300" cy="285" rx="32" ry="32" fill="url(#driedCap)"/>
+  <ellipse cx="300" cy="280" rx="22" ry="12" fill="#78350f"/>
+  
+  <path d="M275 280 Q300 275 325 280" stroke="#451a03" stroke-width="2" fill="none" opacity="0.6"/>
+  <path d="M275 290 Q300 285 325 290" stroke="#451a03" stroke-width="2" fill="none" opacity="0.6"/>
+  
+  <ellipse cx="450" cy="295" rx="35" ry="10" fill="#451a03" opacity="0.3"/>
+  <ellipse cx="450" cy="270" rx="30" ry="30" fill="url(#driedCap)"/>
+  <ellipse cx="450" cy="265" rx="20" ry="10" fill="#78350f"/>
+  
+  <path d="M425 270 Q450 265 475 270" stroke="#451a03" stroke-width="2" fill="none" opacity="0.6"/>
+  <path d="M425 280 Q450 275 475 280" stroke="#451a03" stroke-width="2" fill="none" opacity="0.6"/>
+  
+  <!-- Small dried pieces -->
+  <ellipse cx="220" cy="320" rx="15" ry="5" fill="#451a03" opacity="0.3"/>
+  <ellipse cx="220" cy="310" rx="12" ry="12" fill="url(#driedCap)"/>
+  
+  <ellipse cx="380" cy="330" rx="18" ry="6" fill="#451a03" opacity="0.3"/>
+  <ellipse cx="380" cy="320" rx="15" ry="15" fill="url(#driedCap)"/>
+  
+  <!-- Text -->
+  <text x="300" y="80" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#92400e">Dried Mushrooms</text>
+  <text x="300" y="120" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#92400e">Intense Flavor & Long Shelf Life</text>
+</svg>

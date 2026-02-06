@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0fdf4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#dcfce7;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="mushroom1">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f3f4f6;stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="mushroom2">
+      <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="mushroom3">
+      <stop offset="0%" style="stop-color:#fef2f2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f87171;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#bg)"/>
+  
+  <!-- Large white mushrooms -->
+  <ellipse cx="200" cy="450" rx="80" ry="25" fill="#e5e7eb" opacity="0.3"/>
+  <ellipse cx="200" cy="400" rx="60" ry="60" fill="url(#mushroom1)"/>
+  <ellipse cx="200" cy="380" rx="40" ry="15" fill="#f9fafb"/>
+  
+  <!-- Yellow mushrooms -->
+  <ellipse cx="400" cy="470" rx="70" ry="20" fill="#e5e7eb" opacity="0.3"/>
+  <ellipse cx="400" cy="420" rx="50" ry="50" fill="url(#mushroom2)"/>
+  <ellipse cx="400" cy="405" rx="35" ry="12" fill="#fef3c7"/>
+  
+  <!-- Brown mushrooms -->
+  <ellipse cx="600" cy="460" rx="75" ry="22" fill="#e5e7eb" opacity="0.3"/>
+  <ellipse cx="600" cy="410" rx="55" ry="55" fill="url(#mushroom3)"/>
+  <ellipse cx="600" cy="395" rx="38" ry="14" fill="#fef2f2"/>
+  
+  <!-- Small cluster -->
+  <ellipse cx="850" cy="480" rx="60" ry="18" fill="#e5e7eb" opacity="0.3"/>
+  <ellipse cx="830" cy="440" rx="35" ry="35" fill="url(#mushroom1)"/>
+  <ellipse cx="850" cy="435" rx="30" ry="30" fill="url(#mushroom2)"/>
+  <ellipse cx="870" cy="440" rx="25" ry="25" fill="url(#mushroom3)"/>
+  
+  <!-- Text overlay -->
+  <text x="600" y="100" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#166534">Fresh Mushrooms</text>
+  <text x="600" y="150" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#166534">From Our Bihar Farms to Your Table</text>
+</svg>

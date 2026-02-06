@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <defs>
+    <linearGradient id="freshBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dcfce7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#bbf7d0;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="freshCap">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f3f4f6;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#freshBg)"/>
+  
+  <!-- Fresh mushrooms arrangement -->
+  <ellipse cx="150" cy="300" rx="60" ry="20" fill="#d1d5db" opacity="0.3"/>
+  <ellipse cx="150" cy="250" rx="50" ry="50" fill="url(#freshCap)"/>
+  <ellipse cx="150" cy="240" rx="35" ry="15" fill="#f9fafb"/>
+  
+  <ellipse cx="300" cy="320" rx="55" ry="18" fill="#d1d5db" opacity="0.3"/>
+  <ellipse cx="300" cy="280" rx="45" ry="45" fill="url(#freshCap)"/>
+  <ellipse cx="300" cy="272" rx="32" ry="12" fill="#f9fafb"/>
+  
+  <ellipse cx="450" cy="310" rx="50" ry="17" fill="#d1d5db" opacity="0.3"/>
+  <ellipse cx="450" cy="275" rx="40" ry="40" fill="url(#freshCap)"/>
+  <ellipse cx="450" cy="268" rx="28" ry="11" fill="#f9fafb"/>
+  
+  <!-- Small decorative mushrooms -->
+  <ellipse cx="200" cy="330" rx="25" ry="8" fill="#d1d5db" opacity="0.3"/>
+  <ellipse cx="200" cy="310" rx="20" ry="20" fill="url(#freshCap)"/>
+  
+  <ellipse cx="380" cy="340" rx="22" ry="7" fill="#d1d5db" opacity="0.3"/>
+  <ellipse cx="380" cy="325" rx="18" ry="18" fill="url(#freshCap)"/>
+  
+  <!-- Water drops for freshness -->
+  <ellipse cx="170" cy="230" rx="3" ry="4" fill="#60a5fa" opacity="0.6"/>
+  <ellipse cx="320" cy="265" rx="2" ry="3" fill="#60a5fa" opacity="0.6"/>
+  <ellipse cx="470" cy="260" rx="2.5" ry="3.5" fill="#60a5fa" opacity="0.6"/>
+  
+  <!-- Text -->
+  <text x="300" y="80" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#166534">Fresh Mushrooms</text>
+  <text x="300" y="120" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#166534">Daily Harvested Premium Quality</text>
+</svg>
