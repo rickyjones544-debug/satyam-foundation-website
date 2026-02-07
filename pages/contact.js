@@ -5,79 +5,34 @@ import { Mail, Phone, MapPin, Clock, Send, MessageSquare } from 'lucide-react'
 export default function Contact() {
   const [submitStatus, setSubmitStatus] = useState('')
 
-      if (urlParams.get('success') === 'true') {
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    
+    const formData = new FormData(e.target)
+    
+    // Show loading state
+    setSubmitStatus('loading')
+    
+    fetch('https://formspree.io/f/xvzbowoj', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
         setSubmitStatus('success')
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          subject: '',
-          message: ''
-        })
-        // Clean URL
-        window.history.replaceState({}, '', window.location.pathname)
+        // Clear form
+        e.target.reset()
+      } else {
+        setSubmitStatus('error')
       }
-    }
-  }, []);
-
-  const contactInfo = [
-    {
-      icon: MapPin,
-      title: "Visit Our Farm",
-      details: [
-        "Satyam Mushroom",
-        "Water Wage, Amarpur Road",
-        "Banka, Bihar - 813102"
-      ]
-    },
-    {
-      icon: Phone,
-      title: "Call Us",
-      details: [
-        "+91 91222 05301",
-        "Mon-Sat: 9:00 AM - 6:00 PM"
-      ]
-    },
-    {
-      icon: Mail,
-      title: "Email Us",
-      details: [
-        "natasharoy.collabs@gmail.com",
-        "orders@satyammushroom.com"
-      ]
-    },
-    {
-      icon: Clock,
-      title: "Business Hours",
-      details: [
-        "Monday - Saturday: 9:00 AM - 6:00 PM",
-        "Sunday: 10:00 AM - 4:00 PM",
-        "Orders processed within 24 hours"
-      ]
-    }
-  ]
-
-  const faqs = [
-    {
-      question: "Do you deliver across India?",
-      answer: "Yes, we deliver to all major cities and towns across India. Delivery times may vary based on location."
-    },
-    {
-      question: "How fresh are your mushrooms?",
-      answer: "Our mushrooms are harvested daily and shipped within 24 hours to ensure maximum freshness."
-    },
-    {
-      question: "Do you offer bulk orders?",
-      answer: "Yes, we offer special pricing for bulk orders. Please contact our sales team for more information."
-    },
-    {
-      question: "What payment methods do you accept?",
-      answer: "We accept all major credit/debit cards, UPI, net banking, and cash on delivery for eligible orders."
-    }
-  ]
+    })
+    .catch(error => {
+      setSubmitStatus('error')
+    })
+  }
 
   return (
-    <>
+    <div>
       <Head>
         <title>Contact Us - Satyam Mushroom | Satyam Foundation Charitable Trust</title>
         <meta name="description" content="Contact Satyam Mushroom by Satyam Foundation Charitable Trust for premium mushrooms. Visit our farm in Banka, Bihar, call us at 9122205301, or email natasharoy.collabs@gmail.com." />
@@ -85,7 +40,6 @@ export default function Contact() {
       </Head>
 
       <div className="min-h-screen bg-gray-50">
-
         {/* Hero Section */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -101,27 +55,6 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* Contact Info Cards */}
-        <section className="py-16 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {contactInfo.map((info, index) => (
-                <div key={index} className="text-center">
-                  <div className="mx-auto w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mb-4">
-                    <info.icon className="h-8 w-8 text-primary-600" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{info.title}</h3>
-                  <div className="space-y-1">
-                    {info.details.map((detail, idx) => (
-                      <p key={idx} className="text-gray-600 text-sm">{detail}</p>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Contact Form & Map */}
         <section className="py-16 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -136,6 +69,15 @@ export default function Contact() {
                   </div>
                 )}
                 
+                {submitStatus === 'loading' && (
+                  <div className="mb-6 p-4 bg-blue-100 border border-blue-400 text-blue-700 rounded-lg">
+                    <div className="flex items-center">
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-500 mr-2"></div>
+                      <span className="ml-2">Sending your message...</span>
+                    </div>
+                  </div>
+                )}
+                
                 {submitStatus === 'error' && (
                   <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
                     Sorry, there was an error sending your message. Please try again or call us directly at +91 91222 05301.
@@ -145,194 +87,88 @@ export default function Contact() {
                 <form 
                   action="https://formspree.io/f/xvzbowoj"
                   method="POST"
-                  onSubmit={handleFormSubmit}
+                  onSubmit={handleSubmit}
                   className="space-y-6"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
                         Your Name *
                       </label>
                       <input
                         type="text"
-                        id="name"
                         name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
                         required
-                        className="input-field"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                         placeholder="John Doe"
                       />
                     </div>
+                    
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
                         Email Address *
                       </label>
                       <input
                         type="email"
-                        id="email"
                         name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
                         required
-                        className="input-field"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                         placeholder="john@example.com"
                       />
                     </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                        Your Name *
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Phone Number
                       </label>
                       <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        required
-                        className="input-field"
-                        placeholder="John Doe"
+                        type="tel"
+                        name="phone"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                        placeholder="+91 91222 05301"
                       />
                     </div>
+                    
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                        Email Address *
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Subject *
                       </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
+                      <select
+                        name="subject"
                         required
-                        className="input-field"
-                        placeholder="john@example.com"
-                      />
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                      >
+                        <option value="">Select a subject</option>
+                        <option value="general">General Inquiry</option>
+                        <option value="orders">Order Related</option>
+                        <option value="bulk">Bulk Order</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="partnership">Partnership</option>
+                      </select>
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Message *
+                      </label>
+                      <textarea
+                        name="message"
+                        required
+                        rows={5}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                        placeholder="Tell us how we can help you..."
+                      ></textarea>
+                    </div>
+                    
+                    <div>
+                      <button
+                        type="submit"
+                        className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                      >
+                        Send Message
+                      </button>
                     </div>
                   </div>
-
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="input-field"
-                      placeholder="+91 91222 05301"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                      Subject *
-                    </label>
-                    <select
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      required
-                      className="input-field"
-                    >
-                      <option value="">Select a subject</option>
-                      <option value="general">General Inquiry</option>
-                      <option value="orders">Order Related</option>
-                      <option value="bulk">Bulk Order</option>
-                      <option value="feedback">Feedback</option>
-                      <option value="partnership">Partnership</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                      Message *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      required
-                      rows={5}
-                      className="input-field"
-                      placeholder="Tell us how we can help you..."
-                    ></textarea>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full btn-primary flex items-center justify-center"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="h-5 w-5 mr-2" />
-                        Send Message
-                      </>
-                    )}
-                  </button>
-                    <select
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      required
-                      className="input-field"
-                    >
-                      <option value="">Select a subject</option>
-                      <option value="general">General Inquiry</option>
-                      <option value="orders">Order Related</option>
-                      <option value="bulk">Bulk Order</option>
-                      <option value="feedback">Feedback</option>
-                      <option value="partnership">Partnership</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                      Message *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      required
-                      rows={5}
-                      className="input-field"
-                      placeholder="Tell us how we can help you..."
-                    ></textarea>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full btn-primary flex items-center justify-center"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="h-5 w-5 mr-2" />
-                        Send Message
-                      </>
-                    )}
-                  </button>
                 </form>
               </div>
 
@@ -343,16 +179,13 @@ export default function Contact() {
                 {/* Map Placeholder */}
                 <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-6">
                   <div className="relative h-96 bg-gray-200">
-                    <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3598.123456789!2d85.123456789!3d25.123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDA3JzI0LjAiTiA4NcKwMDcnMjQuNSJF!5e0!3m2!1sen!2sin!4v1234567890"
-                      width="100%"
-                      height="100%"
-                      style={{ border: 0 }}
-                      allowFullScreen=""
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      className="absolute inset-0"
-                    ></iframe>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <MapPin className="h-12 w-12 text-primary-600" />
+                      <div className="text-center">
+                        <p className="text-lg font-semibold text-gray-900">Satyam Mushroom</p>
+                        <p className="text-gray-600">Water Wage, Amarpur Road, Banka, Bihar - 813102</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -378,30 +211,7 @@ export default function Contact() {
             </div>
           </div>
         </section>
-
-        {/* FAQ Section */}
-        <section className="py-16 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-lg text-gray-600">
-                Quick answers to common questions about our products and services
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {faqs.map((faq, index) => (
-                <div key={index} className="bg-gray-50 rounded-lg p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
-                  <p className="text-gray-700">{faq.answer}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
       </div>
-    </>
+    </div>
   )
 }
