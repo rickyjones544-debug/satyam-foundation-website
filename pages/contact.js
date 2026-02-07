@@ -29,10 +29,13 @@ export default function Contact() {
     .catch(error => {
       setSubmitStatus('error')
     })
+    .finally(() => {
+      setIsSubmitting(false)
+    })
   }
 
   return (
-    <div>
+    <>
       <Head>
         <title>Contact Us - Satyam Mushroom | Satyam Foundation Charitable Trust</title>
         <meta name="description" content="Contact Satyam Mushroom by Satyam Foundation Charitable Trust for premium mushrooms. Visit our farm in Banka, Bihar, call us at 9122205301, or email natasharoy.collabs@gmail.com." />
@@ -212,6 +215,6 @@ export default function Contact() {
           </div>
         </section>
       </div>
-    </div>
+    </>
   )
 }
