@@ -5,7 +5,7 @@
   "framework": "nextjs",
   "domains": [
     {
-      "domain": "sbatyam-foundation-mushrooms.vercel.app",
+      "domain": "satyam-foundation-mushrooms.vercel.app",
       "name": "satyam-foundation-mushrooms",
       "publicSuffix": null
     }
