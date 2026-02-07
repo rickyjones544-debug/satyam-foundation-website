@@ -38,9 +38,9 @@ export default function ProductDetail() {
   return (
     <>
       <Head>
-        <title>{product.name} - Satyam Foundation</title>
+        <title>{product.name} - Satyam Mushroom</title>
         <meta name="description" content={product.description} />
-        <meta name="keywords" content={`${product.name}, mushrooms, ${product.category} mushrooms, Bihar mushrooms`} />
+        <meta name="keywords" content={`${product.name}, mushrooms, ${product.category} mushrooms, Satyam Mushroom, Banka Bihar mushrooms`} />
       </Head>
 
       <div className="min-h-screen bg-gray-50">

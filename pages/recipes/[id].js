@@ -25,7 +25,7 @@ export default function RecipeDetail() {
   return (
     <>
       <Head>
-        <title>{recipe.title} - Recipe | Satyam Foundation</title>
+        <title>{recipe.title} - Satyam Mushroom | Mushroom Recipe</title>
         <meta name="description" content={recipe.description} />
         <meta name="keywords" content={`${recipe.title}, mushroom recipe, Indian cuisine, healthy recipes`} />
       </Head>

@@ -51,9 +51,9 @@ export default function About() {
   return (
     <>
       <Head>
-        <title>About Us - Satyam Foundation | Our Story & Mission</title>
-        <meta name="description" content="Learn about Satyam Foundation's journey from a small Bihar farm to a leading mushroom supplier. Discover our mission, values, and commitment to quality." />
-        <meta name="keywords" content="about satyam foundation, mushroom farming Bihar, organic mushrooms, sustainable agriculture" />
+        <title>About Us - Satyam Mushroom | Satyam Foundation Charitable Trust</title>
+        <meta name="description" content="Learn about Satyam Mushroom by Satyam Foundation Charitable Trust. Our journey from Banka, Bihar to becoming a leading mushroom supplier. Discover our mission, values, and commitment to quality." />
+        <meta name="keywords" content="about Satyam Mushroom, Satyam Foundation Charitable Trust, mushroom farming Banka Bihar, organic mushrooms, sustainable agriculture" />
       </Head>
 
       <div className="min-h-screen">
@@ -66,7 +66,7 @@ export default function About() {
                 Our Story
               </h1>
               <p className="text-xl max-w-3xl mx-auto text-primary-100">
-                From a small family farm in Bihar to becoming one of India's most trusted mushroom suppliers,
+                From Satyam Foundation Charitable Trust in Banka, Bihar to becoming one of India's most trusted mushroom suppliers,
                 our journey is rooted in passion, quality, and sustainable farming practices.
               </p>
             </div>
@@ -86,13 +86,13 @@ export default function About() {
                     <h3 className="text-xl font-semibold text-primary-600 mb-3">Mission</h3>
                     <p className="text-gray-700 leading-relaxed">
                       To provide premium quality, organic mushrooms to every Indian household while 
-                      promoting sustainable farming practices and supporting local farming communities in Bihar.
+                      promoting sustainable farming practices and supporting local communities in Banka, Bihar through Satyam Foundation Charitable Trust.
                     </p>
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-primary-600 mb-3">Vision</h3>
                     <p className="text-gray-700 leading-relaxed">
-                      To become India's leading mushroom supplier, known for exceptional quality, 
+                      To become India's leading mushroom supplier under Satyam Mushroom brand, known for exceptional quality, 
                       innovation in mushroom farming, and commitment to environmental sustainability.
                     </p>
                   </div>
@@ -188,21 +188,21 @@ export default function About() {
               </div>
               <div className="order-1 lg:order-2">
                 <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-                  Our Farm in Bihar
+                  Our Farm in Banka, Bihar
                 </h2>
                 <div className="space-y-4">
                   <div className="flex items-start">
                     <MapPin className="h-6 w-6 text-primary-600 mr-3 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Location</h3>
-                      <p className="text-gray-600">Strategically located in the heart of Bihar, ideal for mushroom cultivation</p>
+                      <p className="text-gray-600">Strategically located in Banka, Bihar, ideal for mushroom cultivation with perfect climate conditions</p>
                     </div>
                   </div>
                   <div className="flex items-start">
                     <Leaf className="h-6 w-6 text-primary-600 mr-3 mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Growing Conditions</h3>
-                      <p className="text-gray-600">Perfect climate and soil conditions for growing premium quality mushrooms year-round</p>
+                      <p className="text-gray-600">Perfect climate and soil conditions in Banka for growing premium quality mushrooms year-round</p>
                     </div>
                   </div>
                   <div className="flex items-start">

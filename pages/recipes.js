@@ -28,8 +28,8 @@ export default function Recipes() {
   return (
     <>
       <Head>
-        <title>Mushroom Recipes - Satyam Foundation | Delicious Mushroom Dishes</title>
-        <meta name="description" content="Explore delicious mushroom recipes from Satyam Foundation. From soups to main courses, discover creative ways to cook with fresh and dried mushrooms." />
+        <title>Mushroom Recipes - Satyam Mushroom | Delicious Mushroom Dishes</title>
+        <meta name="description" content="Explore delicious mushroom recipes from Satyam Mushroom by Satyam Foundation Charitable Trust. From soups to main courses, discover creative ways to cook with fresh and dried mushrooms." />
         <meta name="keywords" content="mushroom recipes, cooking mushrooms, Indian mushroom dishes, healthy recipes" />
       </Head>
 

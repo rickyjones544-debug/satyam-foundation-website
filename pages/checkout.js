@@ -120,8 +120,8 @@ export default function Checkout() {
   return (
     <>
       <Head>
-        <title>Checkout - Satyam Foundation</title>
-        <meta name="description" content="Complete your purchase" />
+        <title>Checkout - Satyam Mushroom</title>
+        <meta name="description" content="Complete your purchase from Satyam Mushroom - Premium mushrooms from Banka, Bihar" />
       </Head>
 
       <div className="min-h-screen bg-gray-50">

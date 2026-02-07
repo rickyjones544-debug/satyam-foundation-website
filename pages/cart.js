@@ -71,8 +71,8 @@ export default function Cart() {
   return (
     <>
       <Head>
-        <title>Shopping Cart - Satyam Foundation</title>
-        <meta name="description" content="View your shopping cart and checkout" />
+        <title>Shopping Cart - Satyam Mushroom</title>
+        <meta name="description" content="View your shopping cart and checkout from Satyam Mushroom - Premium mushrooms from Banka, Bihar" />
       </Head>
 
       <div className="min-h-screen bg-gray-50 py-8">

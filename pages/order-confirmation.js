@@ -53,8 +53,8 @@ export default function OrderConfirmation() {
   return (
     <>
       <Head>
-        <title>Order Confirmed - Satyam Foundation</title>
-        <meta name="description" content="Your order has been successfully placed" />
+        <title>Order Confirmed - Satyam Mushroom</title>
+        <meta name="description" content="Your order from Satyam Mushroom has been successfully placed. Premium mushrooms from Banka, Bihar." />
       </Head>
 
       <div className="min-h-screen bg-gray-50">

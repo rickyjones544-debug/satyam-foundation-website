@@ -7,23 +7,23 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-bold mb-4 text-primary-400">Satyam Foundation</h3>
+            <h3 className="text-2xl font-bold mb-4 text-primary-400">Satyam Mushroom</h3>
             <p className="text-earth-100 mb-6 max-w-md">
-              Your trusted source for premium quality mushrooms and mushroom products. 
-              Grown with care in the heart of Bihar, delivering nature's best to your table.
+              Satyam Foundation Charitable Trust - Your trusted source for premium quality mushrooms and mushroom products. 
+              Grown with care in Banka, Bihar, delivering nature's best to your table.
             </p>
             <div className="space-y-2">
               <div className="flex items-center text-earth-200">
                 <MapPin className="h-4 w-4 mr-2 text-primary-400" />
-                <span className="text-sm">Bihar, India</span>
+                <span className="text-sm">Water Wage, Amarpur Road, Banka, Bihar - 813102</span>
               </div>
               <div className="flex items-center text-earth-200">
                 <Phone className="h-4 w-4 mr-2 text-primary-400" />
-                <span className="text-sm">+91 98765 43210</span>
+                <span className="text-sm">+91 91222 05301</span>
               </div>
               <div className="flex items-center text-earth-200">
                 <Mail className="h-4 w-4 mr-2 text-primary-400" />
-                <span className="text-sm">info@satyamfoundation.com</span>
+                <span className="text-sm">mishrar084@gmail.com</span>
               </div>
             </div>
           </div>
@@ -78,7 +78,7 @@ export default function Footer() {
               </a>
             </div>
             <div className="text-earth-400 text-sm">
-              © 2024 Satyam Foundation. All rights reserved.
+              © 2024 Satyam Foundation Charitable Trust. All rights reserved.
             </div>
           </div>
         </div>

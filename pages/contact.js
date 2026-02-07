@@ -43,17 +43,16 @@ export default function Contact() {
       icon: MapPin,
       title: "Visit Our Farm",
       details: [
-        "Satyam Foundation Farm",
-        "Village: Rampur, District: Patna",
-        "Bihar, India - 801110"
+        "Satyam Mushroom",
+        "Water Wage, Amarpur Road",
+        "Banka, Bihar - 813102"
       ]
     },
     {
       icon: Phone,
       title: "Call Us",
       details: [
-        "+91 98765 43210",
-        "+91 87654 32109",
+        "+91 91222 05301",
         "Mon-Sat: 9:00 AM - 6:00 PM"
       ]
     },
@@ -61,9 +60,8 @@ export default function Contact() {
       icon: Mail,
       title: "Email Us",
       details: [
-        "info@satyamfoundation.com",
-        "orders@satyamfoundation.com",
-        "support@satyamfoundation.com"
+        "mishrar084@gmail.com",
+        "orders@satyammushroom.com"
       ]
     },
     {
@@ -99,9 +97,9 @@ export default function Contact() {
   return (
     <>
       <Head>
-        <title>Contact Us - Satyam Foundation | Get in Touch</title>
-        <meta name="description" content="Contact Satyam Foundation for premium mushrooms. Visit our farm in Bihar, call us, or send a message. We're here to help with all your mushroom needs." />
-        <meta name="keywords" content="contact satyam foundation, mushroom farm Bihar, customer support, mushroom orders" />
+        <title>Contact Us - Satyam Mushroom | Satyam Foundation Charitable Trust</title>
+        <meta name="description" content="Contact Satyam Mushroom by Satyam Foundation Charitable Trust for premium mushrooms. Visit our farm in Banka, Bihar, call us at 9122205301, or email mishrar084@gmail.com." />
+        <meta name="keywords" content="contact Satyam Mushroom, Satyam Foundation Charitable Trust, mushroom farm Banka Bihar, customer support, 9122205301, mishrar084@gmail.com" />
       </Head>
 
       <div className="min-h-screen bg-gray-50">
@@ -115,7 +113,7 @@ export default function Contact() {
               </h1>
               <p className="text-xl max-w-3xl mx-auto text-primary-100">
                 Have questions about our products or want to place an order? 
-                We'd love to hear from you. Reach out through any of the channels below.
+                Satyam Mushroom by Satyam Foundation Charitable Trust is here to help. Reach out through any of the channels below.
               </p>
             </div>
           </div>
@@ -201,7 +199,7 @@ export default function Contact() {
                       value={formData.phone}
                       onChange={handleInputChange}
                       className="input-field"
-                      placeholder="+91 98765 43210"
+                      placeholder="+91 91222 05301"
                     />
                   </div>
 
@@ -286,17 +284,17 @@ export default function Contact() {
                 <div className="bg-white rounded-lg shadow-lg p-6">
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">Quick Contact</h3>
                   <div className="space-y-4">
-                    <a href="tel:+919876543210" className="flex items-center text-gray-700 hover:text-primary-600">
+                    <a href="tel:+919122205301" className="flex items-center text-gray-700 hover:text-primary-600">
                       <Phone className="h-5 w-5 mr-3" />
-                      +91 98765 43210
+                      +91 91222 05301
                     </a>
-                    <a href="mailto:info@satyamfoundation.com" className="flex items-center text-gray-700 hover:text-primary-600">
+                    <a href="mailto:mishrar084@gmail.com" className="flex items-center text-gray-700 hover:text-primary-600">
                       <Mail className="h-5 w-5 mr-3" />
-                      info@satyamfoundation.com
+                      mishrar084@gmail.com
                     </a>
-                    <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-700 hover:text-primary-600">
+                    <a href="https://wa.me/919122205301" target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-700 hover:text-primary-600">
                       <MessageSquare className="h-5 w-5 mr-3" />
-                      WhatsApp: +91 98765 43210
+                      WhatsApp: +91 91222 05301
                     </a>
                   </div>
                 </div>

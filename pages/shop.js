@@ -65,8 +65,8 @@ export default function Shop() {
   return (
     <>
       <Head>
-        <title>Shop - Satyam Foundation | Fresh & Dried Mushrooms</title>
-        <meta name="description" content="Browse our wide selection of fresh and dried mushrooms. Premium quality mushrooms from Bihar, India." />
+        <title>Shop - Satyam Mushroom | Fresh Mushrooms & Products</title>
+        <meta name="description" content="Shop premium fresh and dried mushrooms from Satyam Mushroom by Satyam Foundation Charitable Trust. Quality mushrooms from Banka, Bihar delivered to your doorstep." />
         <meta name="keywords" content="buy mushrooms, fresh mushrooms, dried mushrooms, mushroom shop, Bihar mushrooms" />
       </Head>
 

@@ -13,23 +13,23 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Satyam Foundation - Fresh Mushrooms & Mushroom Products | Bihar, India</title>
-        <meta name="description" content="Premium quality fresh and dried mushrooms from Bihar, India. Shop organic mushrooms, mushroom products, and explore delicious recipes." />
-        <meta name="keywords" content="fresh mushrooms, dried mushrooms, mushroom products, organic mushrooms, Bihar mushrooms, mushroom farming" />
-        <meta name="author" content="Satyam Foundation" />
+        <title>Satyam Mushroom - Satyam Foundation Charitable Trust | Fresh Mushrooms & Mushroom Products | Banka, Bihar</title>
+        <meta name="description" content="Premium quality fresh and dried mushrooms from Banka, Bihar. Satyam Mushroom by Satyam Foundation Charitable Trust offers organic mushrooms, mushroom products, and delicious recipes." />
+        <meta name="keywords" content="Satyam Mushroom, Satyam Foundation Charitable Trust, fresh mushrooms, dried mushrooms, mushroom products, organic mushrooms, Banka Bihar mushrooms, mushroom farming" />
+        <meta name="author" content="Satyam Foundation Charitable Trust" />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://satyamfoundation.com/" />
-        <meta property="og:title" content="Satyam Foundation - Fresh Mushrooms & Mushroom Products" />
-        <meta property="og:description" content="Premium quality fresh and dried mushrooms from Bihar, India. Shop organic mushrooms and explore recipes." />
+        <meta property="og:url" content="https://sbatyam-foundation-mushrooms.vercel.app/" />
+        <meta property="og:title" content="Satyam Mushroom - Satyam Foundation Charitable Trust" />
+        <meta property="og:description" content="Premium quality fresh and dried mushrooms from Banka, Bihar. Satyam Mushroom by Satyam Foundation Charitable Trust." />
         <meta property="og:image" content="/images/og-image.jpg" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://satyamfoundation.com/" />
-        <meta property="twitter:title" content="Satyam Foundation - Fresh Mushrooms & Mushroom Products" />
-        <meta property="twitter:description" content="Premium quality fresh and dried mushrooms from Bihar, India." />
+        <meta property="twitter:url" content="https://sbatyam-foundation-mushrooms.vercel.app/" />
+        <meta property="twitter:title" content="Satyam Mushroom - Satyam Foundation Charitable Trust" />
+        <meta property="twitter:description" content="Premium quality fresh and dried mushrooms from Banka, Bihar by Satyam Foundation Charitable Trust." />
         <meta property="twitter:image" content="/images/og-image.jpg" />
 
         <link rel="icon" href="/favicon.ico" />
