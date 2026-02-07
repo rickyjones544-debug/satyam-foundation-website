@@ -18,7 +18,7 @@ export default function Contact() {
         window.history.replaceState({}, '', window.location.pathname)
       }
     }
-  }, [])
+  }, []);
 
   const contactInfo = [
     {
