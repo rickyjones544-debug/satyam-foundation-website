@@ -47,7 +47,7 @@ export default function Contact() {
                 <form 
                   action="https://formspree.io/f/xvzbowoj"
                   method="POST"
-                  onSubmit="handleSubmit(event)"
+                  target="_blank"
                   className="space-y-6"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -124,6 +124,7 @@ export default function Contact() {
                       <button
                         type="submit"
                         className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                        onClick="showSuccessMessage()"
                       >
                         Send Message
                       </button>
@@ -175,61 +176,11 @@ export default function Contact() {
       
       <script dangerouslySetInnerHTML={{
         __html: `
-          function handleSubmit(event) {
-            event.preventDefault();
-            
-            // Show loading state
-            const button = event.target.querySelector('button[type="submit"]');
-            const originalText = button.textContent;
-            button.textContent = 'Sending...';
-            button.disabled = true;
-            
-            // Get form data
-            const formData = new FormData(event.target);
-            
-            // Submit to Formspree using XMLHttpRequest to avoid CORS
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'https://formspree.io/f/xvzbowoj', true);
-            xhr.setRequestHeader('Accept', 'application/json');
-            
-            xhr.onreadystatechange = function() {
-              if (xhr.readyState === XMLHttpRequest.DONE) {
-                console.log('Response status:', xhr.status);
-                console.log('Response text:', xhr.responseText);
-                
-                // Hide both messages first
-                document.getElementById('success-message').classList.add('hidden');
-                document.getElementById('error-message').classList.add('hidden');
-                
-                if (xhr.status === 200) {
-                  // Show success message
-                  document.getElementById('success-message').classList.remove('hidden');
-                  // Clear form
-                  event.target.reset();
-                } else {
-                  // Show error message
-                  document.getElementById('error-message').classList.remove('hidden');
-                }
-                
-                // Reset button
-                button.textContent = originalText;
-                button.disabled = false;
-              }
-            };
-            
-            xhr.onerror = function() {
-              console.error('Request failed');
-              // Show error message
-              document.getElementById('success-message').classList.add('hidden');
-              document.getElementById('error-message').classList.remove('hidden');
-              
-              // Reset button
-              button.textContent = originalText;
-              button.disabled = false;
-            };
-            
-            // Send the request
-            xhr.send(formData);
+          function showSuccessMessage() {
+            // Hide error message
+            document.getElementById('error-message').classList.add('hidden');
+            // Show success message
+            document.getElementById('success-message').classList.remove('hidden');
           }
         `
       }} />
