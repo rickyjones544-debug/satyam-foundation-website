@@ -49,12 +49,10 @@ export default function Contact() {
     
     fetch('https://formspree.io/f/xvzbowoj', {
       method: 'POST',
-      body: formData,
-      headers: {
-        'Accept': 'application/json'
-      }
+      body: formData
     })
     .then(response => {
+      console.log('Formspree response:', response.status, response.ok)
       if (response.ok) {
         setSubmitStatus('success')
         setFormData({
@@ -69,13 +67,32 @@ export default function Contact() {
       }
     })
     .catch(error => {
+      console.error('Submit error:', error)
       setSubmitStatus('error')
-      console.error('Error:', error)
     })
     .finally(() => {
       setIsSubmitting(false)
     })
   }
+
+  // Fallback success handler for Formspree
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search)
+      if (urlParams.get('success') === 'true') {
+        setSubmitStatus('success')
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        })
+        // Clean URL
+        window.history.replaceState({}, '', window.location.pathname)
+      }
+    }
+  }, [])
 
   const contactInfo = [
     {
