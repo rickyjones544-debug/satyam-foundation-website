@@ -43,21 +43,11 @@ export default function Contact() {
   const handleFormSubmit = (e) => {
     e.preventDefault()
     setIsSubmitting(true)
+    
+    // Clear any previous status
     setSubmitStatus('')
     
     const formData = new FormData(e.target)
-    
-    // Show success immediately for better UX
-    setTimeout(() => {
-      setSubmitStatus('success')
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: ''
-      })
-    }, 1000)
     
     fetch('https://formspree.io/f/xvzbowoj', {
       method: 'POST',
@@ -65,7 +55,20 @@ export default function Contact() {
     })
     .then(response => {
       console.log('Formspree response:', response.status, response.ok)
-      // Don't override success if already shown
+      if (response.ok) {
+        // Success - show success message and clear form
+        setSubmitStatus('success')
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        })
+      } else {
+        // Error - show error message
+        setSubmitStatus('error')
+      }
     })
     .catch(error => {
       console.error('Submit error:', error)
