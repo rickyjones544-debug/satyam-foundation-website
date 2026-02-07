@@ -3,86 +3,8 @@ import Head from 'next/head'
 import { Mail, Phone, MapPin, Clock, Send, MessageSquare } from 'lucide-react'
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: ''
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState('')
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
-
-  // Handle form submission success
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search)
-      if (urlParams.get('success') === 'true') {
-        setSubmitStatus('success')
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          subject: '',
-          message: ''
-        })
-        // Clean URL
-        window.history.replaceState({}, '', window.location.pathname)
-      }
-    }
-  }, [])
-
-  // Handle Formspree redirect
-  const handleFormSubmit = (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    
-    // Clear any previous status
-    setSubmitStatus('')
-    
-    const formData = new FormData(e.target)
-    
-    fetch('https://formspree.io/f/xvzbowoj', {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => {
-      console.log('Formspree response:', response.status, response.ok)
-      if (response.ok) {
-        // Success - show success message and clear form
-        setSubmitStatus('success')
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          subject: '',
-          message: ''
-        })
-      } else {
-        // Error - show error message
-        setSubmitStatus('error')
-      }
-    })
-    .catch(error => {
-      console.error('Submit error:', error)
-      setSubmitStatus('error')
-    })
-    .finally(() => {
-      setIsSubmitting(false)
-    })
-  }
-
-  // Fallback success handler for Formspree
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search)
       if (urlParams.get('success') === 'true') {
         setSubmitStatus('success')
         setFormData({
