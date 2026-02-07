@@ -46,10 +46,13 @@ export default function Contact() {
           message: ''
         })
       } else {
+        const errorData = await response.json()
         setSubmitStatus('error')
+        console.error('Formspree error:', errorData)
       }
     } catch (error) {
       setSubmitStatus('error')
+      console.error('Submit error:', error)
     }
     
     setIsSubmitting(false)
@@ -173,15 +176,48 @@ export default function Contact() {
                 
                 {submitStatus === 'error' && (
                   <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
-                    Sorry, there was an error sending your message. Please try again or call us directly.
+                    Sorry, there was an error sending your message. Please try again or call us directly at +91 91222 05301.
                   </div>
                 )}
 
                 <form 
                   action="https://formspree.io/f/xvzbowoj"
                   method="POST"
-                  onSubmit={handleSubmit}
                   className="space-y-6"
+                  onSubmit={(e) => {
+                    e.preventDefault()
+                    setIsSubmitting(true)
+                    setSubmitStatus('')
+                    
+                    // Use native form submission
+                    const formData = new FormData(e.target)
+                    
+                    fetch('https://formspree.io/f/xvzbowoj', {
+                      method: 'POST',
+                      body: formData
+                    })
+                    .then(response => {
+                      if (response.ok) {
+                        setSubmitStatus('success')
+                        setFormData({
+                          name: '',
+                          email: '',
+                          phone: '',
+                          subject: '',
+                          message: ''
+                        })
+                      } else {
+                        setSubmitStatus('error')
+                      }
+                    })
+                    .catch(error => {
+                      setSubmitStatus('error')
+                      console.error('Error:', error)
+                    })
+                    .finally(() => {
+                      setIsSubmitting(false)
+                    })
+                  }}
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
