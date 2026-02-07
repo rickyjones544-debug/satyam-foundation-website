@@ -20,44 +20,6 @@ export default function Contact() {
     })
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus('')
-    
-    try {
-      const formData = new FormData(e.target)
-      
-      const response = await fetch('https://formspree.io/f/xvzbowoj', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
-      
-      if (response.ok) {
-        setSubmitStatus('success')
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          subject: '',
-          message: ''
-        })
-      } else {
-        const errorData = await response.json()
-        setSubmitStatus('error')
-        console.error('Formspree error:', errorData)
-      }
-    } catch (error) {
-      setSubmitStatus('error')
-      console.error('Submit error:', error)
-    }
-    
-    setIsSubmitting(false)
-  }
-
   const contactInfo = [
     {
       icon: MapPin,
@@ -184,41 +146,40 @@ export default function Contact() {
                   action="https://formspree.io/f/xvzbowoj"
                   method="POST"
                   className="space-y-6"
-                  onSubmit={(e) => {
-                    e.preventDefault()
-                    setIsSubmitting(true)
-                    setSubmitStatus('')
-                    
-                    // Use native form submission
-                    const formData = new FormData(e.target)
-                    
-                    fetch('https://formspree.io/f/xvzbowoj', {
-                      method: 'POST',
-                      body: formData
-                    })
-                    .then(response => {
-                      if (response.ok) {
-                        setSubmitStatus('success')
-                        setFormData({
-                          name: '',
-                          email: '',
-                          phone: '',
-                          subject: '',
-                          message: ''
-                        })
-                      } else {
-                        setSubmitStatus('error')
-                      }
-                    })
-                    .catch(error => {
-                      setSubmitStatus('error')
-                      console.error('Error:', error)
-                    })
-                    .finally(() => {
-                      setIsSubmitting(false)
-                    })
-                  }}
                 >
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                        Your Name *
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        required
+                        className="input-field"
+                        placeholder="John Doe"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                        Email Address *
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
+                        className="input-field"
+                        placeholder="john@example.com"
+                      />
+                    </div>
+                  </div>
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -271,6 +232,56 @@ export default function Contact() {
                     <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
                       Subject *
                     </label>
+                    <select
+                      id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      required
+                      className="input-field"
+                    >
+                      <option value="">Select a subject</option>
+                      <option value="general">General Inquiry</option>
+                      <option value="orders">Order Related</option>
+                      <option value="bulk">Bulk Order</option>
+                      <option value="feedback">Feedback</option>
+                      <option value="partnership">Partnership</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                      Message *
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      required
+                      rows={5}
+                      className="input-field"
+                      placeholder="Tell us how we can help you..."
+                    ></textarea>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full btn-primary flex items-center justify-center"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="h-5 w-5 mr-2" />
+                        Send Message
+                      </>
+                    )}
+                  </button>
                     <select
                       id="subject"
                       name="subject"
