@@ -2,12 +2,5 @@
   "buildCommand": "npm run build",
   "outputDirectory": ".next",
   "installCommand": "npm install",
-  "framework": "nextjs",
-  "domains": [
-    {
-      "domain": "satyam-foundation-mushrooms.vercel.app",
-      "name": "satyam-foundation-mushrooms",
-      "publicSuffix": null
-    }
-  ]
+  "framework": "nextjs"
 }
