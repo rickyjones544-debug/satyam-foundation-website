@@ -4,39 +4,18 @@ import { Mail, Phone, MapPin, Clock, Send, MessageSquare } from 'lucide-react'
 
 export default function Contact() {
   const [submitStatus, setSubmitStatus] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    
-    const formData = new FormData(e.target)
-    
-    // Show loading state
-    setIsSubmitting(true)
-    setSubmitStatus('loading')
-    
-    fetch('https://formspree.io/f/xvzbowoj', {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => {
-      console.log('Response status:', response.status, response.ok)
-      if (response.ok) {
+  // Check for success parameter in URL
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search)
+      if (urlParams.get('success') === 'true') {
         setSubmitStatus('success')
-        // Clear form
-        e.target.reset()
-      } else {
-        setSubmitStatus('error')
+        // Clean URL
+        window.history.replaceState({}, '', window.location.pathname)
       }
-    })
-    .catch(error => {
-      console.error('Error:', error)
-      setSubmitStatus('error')
-    })
-    .finally(() => {
-      setIsSubmitting(false)
-    })
-  }
+    }
+  }, [])
 
   return (
     <>
@@ -76,15 +55,6 @@ export default function Contact() {
                   </div>
                 )}
                 
-                {submitStatus === 'loading' && (
-                  <div className="mb-6 p-4 bg-blue-100 border border-blue-400 text-blue-700 rounded-lg">
-                    <div className="flex items-center">
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-500 mr-2"></div>
-                      <span className="ml-2">Sending your message...</span>
-                    </div>
-                  </div>
-                )}
-                
                 {submitStatus === 'error' && (
                   <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
                     Sorry, there was an error sending your message. Please try again or call us directly at +91 91222 05301.
@@ -94,7 +64,6 @@ export default function Contact() {
                 <form 
                   action="https://formspree.io/f/xvzbowoj"
                   method="POST"
-                  onSubmit={handleSubmit}
                   className="space-y-6"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -170,10 +139,9 @@ export default function Contact() {
                     <div>
                       <button
                         type="submit"
-                        disabled={isSubmitting}
-                        className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50"
+                        className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
                       >
-                        {isSubmitting ? 'Sending...' : 'Send Message'}
+                        Send Message
                       </button>
                     </div>
                   </div>
