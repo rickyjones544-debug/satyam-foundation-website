@@ -1,21 +1,21 @@
 # 📧 Email Configuration Setup Guide
 
 ## 🎯 Current Status
-Your contact form is updated to send real emails! Now you need to configure Formspree to receive emails at **mishrar084@gmail.com**
+Your contact form is updated to send real emails! Now you need to configure Formspree to receive emails at **natasharoy.collabs@gmail.com**
 
 ## 📋 Step-by-Step Setup
 
 ### Step 1: Create Formspree Account
 1. Go to **https://formspree.io**
 2. Click **"Sign Up"**
-3. Sign up with your email: **mishrar084@gmail.com**
+3. Sign up with your email: **natasharoy.collabs@gmail.com**
 4. Verify your email address
 
 ### Step 2: Create New Form
 1. After logging in, click **"New Form"**
 2. Enter form details:
    - **Form name:** Satyam Mushroom Contact
-   - **Email for notifications:** mishrar084@gmail.com
+   - **Email for notifications:** natasharoy.collabs@gmail.com
 3. Click **"Create Form"**
 
 ### Step 3: Get Your Form ID
@@ -37,14 +37,14 @@ Your contact form is updated to send real emails! Now you need to configure Form
 2. Go to the contact page
 3. Fill out the form with test information
 4. Submit the form
-5. Check your email: mishrar084@gmail.com
+5. Check your email: **natasharoy.collabs@gmail.com**
 
 ## 🔧 What Happens Next?
 
 ### When Someone Submits the Form:
-✅ You'll receive an email at mishrar084@gmail.com  
+✅ You'll receive an email at **natasharoy.collabs@gmail.com**  
 ✅ Email includes: Name, Email, Phone, Subject, Message  
-✅ User sees success message on website  
+✅ User sees success message on the website  
 ✅ Form data is stored in your Formspree dashboard  
 
 ### Features You Get:
@@ -68,7 +68,7 @@ If you prefer other services:
 - **Netlify Forms** - If using Netlify hosting
 
 ## ⚡ Quick Setup Summary
-1. Sign up at formspree.io with mishrar084@gmail.com
+1. Sign up at formspree.io with natasharoy.collabs@gmail.com
 2. Create new form
 3. Copy form ID
 4. Update contact.js with your form ID

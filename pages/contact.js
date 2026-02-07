@@ -77,7 +77,7 @@ export default function Contact() {
       icon: Mail,
       title: "Email Us",
       details: [
-        "mishrar084@gmail.com",
+        "natasharoy.collabs@gmail.com",
         "orders@satyammushroom.com"
       ]
     },
@@ -115,8 +115,8 @@ export default function Contact() {
     <>
       <Head>
         <title>Contact Us - Satyam Mushroom | Satyam Foundation Charitable Trust</title>
-        <meta name="description" content="Contact Satyam Mushroom by Satyam Foundation Charitable Trust for premium mushrooms. Visit our farm in Banka, Bihar, call us at 9122205301, or email mishrar084@gmail.com." />
-        <meta name="keywords" content="contact Satyam Mushroom, Satyam Foundation Charitable Trust, mushroom farm Banka Bihar, customer support, 9122205301, mishrar084@gmail.com" />
+        <meta name="description" content="Contact Satyam Mushroom by Satyam Foundation Charitable Trust for premium mushrooms. Visit our farm in Banka, Bihar, call us at 9122205301, or email natasharoy.collabs@gmail.com." />
+        <meta name="keywords" content="contact Satyam Mushroom, Satyam Foundation Charitable Trust, mushroom farm Banka Bihar, customer support, 9122205301, natasharoy.collabs@gmail.com" />
       </Head>
 
       <div className="min-h-screen bg-gray-50">
@@ -167,7 +167,7 @@ export default function Contact() {
                 
                 {submitStatus === 'success' && (
                   <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
-                    Thank you for your message! We'll get back to you within 24 hours.
+                    Thank you for your message! We'll get back to you within 24 hours at natasharoy.collabs@gmail.com.
                   </div>
                 )}
                 
@@ -311,9 +311,9 @@ export default function Contact() {
                       <Phone className="h-5 w-5 mr-3" />
                       +91 91222 05301
                     </a>
-                    <a href="mailto:mishrar084@gmail.com" className="flex items-center text-gray-700 hover:text-primary-600">
+                    <a href="mailto:natasharoy.collabs@gmail.com" className="flex items-center text-gray-700 hover:text-primary-600">
                       <Mail className="h-5 w-5 mr-3" />
-                      mishrar084@gmail.com
+                      natasharoy.collabs@gmail.com
                     </a>
                     <a href="https://wa.me/919122205301" target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-700 hover:text-primary-600">
                       <MessageSquare className="h-5 w-5 mr-3" />
