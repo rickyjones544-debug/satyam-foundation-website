@@ -23,19 +23,36 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitStatus('')
     
-    // Simulate form submission
-    setTimeout(() => {
-      setSubmitStatus('success')
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: ''
+    try {
+      const formData = new FormData(e.target)
+      
+      const response = await fetch('https://formspree.io/f/xyzyzyzy', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
       })
-      setIsSubmitting(false)
-    }, 1500)
+      
+      if (response.ok) {
+        setSubmitStatus('success')
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        })
+      } else {
+        setSubmitStatus('error')
+      }
+    } catch (error) {
+      setSubmitStatus('error')
+    }
+    
+    setIsSubmitting(false)
   }
 
   const contactInfo = [
@@ -151,6 +168,12 @@ export default function Contact() {
                 {submitStatus === 'success' && (
                   <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
                     Thank you for your message! We'll get back to you within 24 hours.
+                  </div>
+                )}
+                
+                {submitStatus === 'error' && (
+                  <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                    Sorry, there was an error sending your message. Please try again or call us directly.
                   </div>
                 )}
 
