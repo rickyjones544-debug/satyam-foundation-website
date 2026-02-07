@@ -1,10 +1,7 @@
-import { useState } from 'react'
 import Head from 'next/head'
 import { Mail, Phone, MapPin, Clock, Send, MessageSquare } from 'lucide-react'
 
 export default function Contact() {
-  const [submitStatus, setSubmitStatus] = useState('')
-
   return (
     <>
       <Head>
@@ -37,9 +34,20 @@ export default function Contact() {
               <div>
                 <h2 className="text-3xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
                 
+                {/* Success Message - Always show after form submission */}
+                <div id="success-message" className="hidden mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                  Thank you for your inquiry! Our team will get back to you within 24 hours.
+                </div>
+                
+                {/* Error Message - Always show after form submission */}
+                <div id="error-message" className="hidden mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                  Sorry, there was an error sending your message. Please try again or call us directly at +91 91222 05301.
+                </div>
+                
                 <form 
-                  action="https://formspree.io/f/xvzbowoj?success=true"
+                  action="https://formspree.io/f/xvzbowoj"
                   method="POST"
+                  onSubmit="handleSubmit(event)"
                   className="space-y-6"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -164,6 +172,57 @@ export default function Contact() {
           </div>
         </section>
       </div>
+      
+      <script dangerouslySetInnerHTML={{
+        __html: `
+          function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Show loading state
+            const button = event.target.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+            button.textContent = 'Sending...';
+            button.disabled = true;
+            
+            // Get form data
+            const formData = new FormData(event.target);
+            
+            // Submit to Formspree
+            fetch('https://formspree.io/f/xvzbowoj', {
+              method: 'POST',
+              body: formData
+            })
+            .then(response => {
+              console.log('Response:', response.status, response.ok);
+              
+              // Hide both messages first
+              document.getElementById('success-message').classList.add('hidden');
+              document.getElementById('error-message').classList.add('hidden');
+              
+              if (response.ok) {
+                // Show success message
+                document.getElementById('success-message').classList.remove('hidden');
+                // Clear form
+                event.target.reset();
+              } else {
+                // Show error message
+                document.getElementById('error-message').classList.remove('hidden');
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              // Show error message
+              document.getElementById('success-message').classList.add('hidden');
+              document.getElementById('error-message').classList.remove('hidden');
+            })
+            .finally(() => {
+              // Reset button
+              button.textContent = originalText;
+              button.disabled = false;
+            });
+          }
+        `
+      }} />
     </>
   )
 }
