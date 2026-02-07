@@ -187,39 +187,49 @@ export default function Contact() {
             // Get form data
             const formData = new FormData(event.target);
             
-            // Submit to Formspree
-            fetch('https://formspree.io/f/xvzbowoj', {
-              method: 'POST',
-              body: formData
-            })
-            .then(response => {
-              console.log('Response:', response.status, response.ok);
-              
-              // Hide both messages first
-              document.getElementById('success-message').classList.add('hidden');
-              document.getElementById('error-message').classList.add('hidden');
-              
-              if (response.ok) {
-                // Show success message
-                document.getElementById('success-message').classList.remove('hidden');
-                // Clear form
-                event.target.reset();
-              } else {
-                // Show error message
-                document.getElementById('error-message').classList.remove('hidden');
+            // Submit to Formspree using XMLHttpRequest to avoid CORS
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://formspree.io/f/xvzbowoj', true);
+            xhr.setRequestHeader('Accept', 'application/json');
+            
+            xhr.onreadystatechange = function() {
+              if (xhr.readyState === XMLHttpRequest.DONE) {
+                console.log('Response status:', xhr.status);
+                console.log('Response text:', xhr.responseText);
+                
+                // Hide both messages first
+                document.getElementById('success-message').classList.add('hidden');
+                document.getElementById('error-message').classList.add('hidden');
+                
+                if (xhr.status === 200) {
+                  // Show success message
+                  document.getElementById('success-message').classList.remove('hidden');
+                  // Clear form
+                  event.target.reset();
+                } else {
+                  // Show error message
+                  document.getElementById('error-message').classList.remove('hidden');
+                }
+                
+                // Reset button
+                button.textContent = originalText;
+                button.disabled = false;
               }
-            })
-            .catch(error => {
-              console.error('Error:', error);
+            };
+            
+            xhr.onerror = function() {
+              console.error('Request failed');
               // Show error message
               document.getElementById('success-message').classList.add('hidden');
               document.getElementById('error-message').classList.remove('hidden');
-            })
-            .finally(() => {
+              
               // Reset button
               button.textContent = originalText;
               button.disabled = false;
-            });
+            };
+            
+            // Send the request
+            xhr.send(formData);
           }
         `
       }} />
