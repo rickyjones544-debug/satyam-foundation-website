@@ -1,21 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Head from 'next/head'
 import { Mail, Phone, MapPin, Clock, Send, MessageSquare } from 'lucide-react'
 
 export default function Contact() {
   const [submitStatus, setSubmitStatus] = useState('')
-
-  // Check for success parameter in URL
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search)
-      if (urlParams.get('success') === 'true') {
-        setSubmitStatus('success')
-        // Clean URL
-        window.history.replaceState({}, '', window.location.pathname)
-      }
-    }
-  }, [])
 
   return (
     <>
@@ -49,20 +37,8 @@ export default function Contact() {
               <div>
                 <h2 className="text-3xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
                 
-                {submitStatus === 'success' && (
-                  <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
-                    Thank you for your inquiry! Our team will get back to you within 24 hours.
-                  </div>
-                )}
-                
-                {submitStatus === 'error' && (
-                  <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
-                    Sorry, there was an error sending your message. Please try again or call us directly at +91 91222 05301.
-                  </div>
-                )}
-
                 <form 
-                  action="https://formspree.io/f/xvzbowoj"
+                  action="https://formspree.io/f/xvzbowoj?success=true"
                   method="POST"
                   className="space-y-6"
                 >
