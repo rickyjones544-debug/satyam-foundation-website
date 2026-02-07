@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { recipes } from '../data/recipes'
 import { Clock, ChefHat, Filter, Search } from 'lucide-react'
 
 export default function Recipes() {
+  const router = useRouter()
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -63,7 +65,7 @@ export default function Recipes() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {featuredRecipes.map((recipe) => (
-                <RecipeCard key={recipe.id} recipe={recipe} featured />
+                <RecipeCard key={recipe.id} recipe={recipe} featured router={router} />
               ))}
             </div>
           </div>
@@ -119,7 +121,7 @@ export default function Recipes() {
             {/* Recipe Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredRecipes.map((recipe) => (
-                <RecipeCard key={recipe.id} recipe={recipe} />
+                <RecipeCard key={recipe.id} recipe={recipe} router={router} />
               ))}
             </div>
 
@@ -137,9 +139,21 @@ export default function Recipes() {
   )
 }
 
-function RecipeCard({ recipe, featured = false }) {
+function RecipeCard({ recipe, featured = false, router }) {
+  const handleCardClick = () => {
+    router.push(`/recipe/${recipe.id}`)
+  }
+
+  const handleButtonClick = (e) => {
+    e.stopPropagation()
+    router.push(`/recipe/${recipe.id}`)
+  }
+
   return (
-    <div className={`bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer ${featured ? 'md:col-span-2 lg:col-span-1' : ''}`}>
+    <div 
+      className={`bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer ${featured ? 'md:col-span-2 lg:col-span-1' : ''}`}
+      onClick={handleCardClick}
+    >
       <div className="relative h-48 bg-gray-100">
         <img 
           src={recipe.image} 
@@ -185,7 +199,10 @@ function RecipeCard({ recipe, featured = false }) {
           </div>
         </div>
         
-        <button className="w-full mt-4 bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+        <button 
+          className="w-full mt-4 bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+          onClick={handleButtonClick}
+        >
           View Recipe
         </button>
       </div>
