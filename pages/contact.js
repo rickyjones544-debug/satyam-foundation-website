@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { Mail, Phone, MapPin, Clock, Send, MessageSquare } from 'lucide-react'
 
@@ -6,7 +6,7 @@ export default function Contact() {
   const [submitStatus, setSubmitStatus] = useState('')
 
   // Check for success parameter in URL
-  React.useEffect(() => {
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search)
       if (urlParams.get('success') === 'true') {
