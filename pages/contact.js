@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin, Clock, Send, MessageSquare } from 'lucide-react'
 
 export default function Contact() {
   const [submitStatus, setSubmitStatus] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -11,6 +12,7 @@ export default function Contact() {
     const formData = new FormData(e.target)
     
     // Show loading state
+    setIsSubmitting(true)
     setSubmitStatus('loading')
     
     fetch('https://formspree.io/f/xvzbowoj', {
@@ -18,6 +20,7 @@ export default function Contact() {
       body: formData
     })
     .then(response => {
+      console.log('Response status:', response.status, response.ok)
       if (response.ok) {
         setSubmitStatus('success')
         // Clear form
@@ -27,6 +30,7 @@ export default function Contact() {
       }
     })
     .catch(error => {
+      console.error('Error:', error)
       setSubmitStatus('error')
     })
     .finally(() => {
@@ -166,9 +170,10 @@ export default function Contact() {
                     <div>
                       <button
                         type="submit"
-                        className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                        disabled={isSubmitting}
+                        className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50"
                       >
-                        Send Message
+                        {isSubmitting ? 'Sending...' : 'Send Message'}
                       </button>
                     </div>
                   </div>
