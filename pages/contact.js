@@ -20,6 +20,25 @@ export default function Contact() {
     })
   }
 
+  // Handle form submission success
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search)
+      if (urlParams.get('success') === 'true') {
+        setSubmitStatus('success')
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        })
+        // Clean URL
+        window.history.replaceState({}, '', window.location.pathname)
+      }
+    }
+  }, [])
+
   const contactInfo = [
     {
       icon: MapPin,
