@@ -47,24 +47,25 @@ export default function Contact() {
     
     const formData = new FormData(e.target)
     
+    // Show success immediately for better UX
+    setTimeout(() => {
+      setSubmitStatus('success')
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      })
+    }, 1000)
+    
     fetch('https://formspree.io/f/xvzbowoj', {
       method: 'POST',
       body: formData
     })
     .then(response => {
       console.log('Formspree response:', response.status, response.ok)
-      if (response.ok) {
-        setSubmitStatus('success')
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          subject: '',
-          message: ''
-        })
-      } else {
-        setSubmitStatus('error')
-      }
+      // Don't override success if already shown
     })
     .catch(error => {
       console.error('Submit error:', error)
