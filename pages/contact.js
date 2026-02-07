@@ -39,6 +39,44 @@ export default function Contact() {
     }
   }, [])
 
+  // Handle Formspree redirect
+  const handleFormSubmit = (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus('')
+    
+    const formData = new FormData(e.target)
+    
+    fetch('https://formspree.io/f/xvzbowoj', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        setSubmitStatus('success')
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        })
+      } else {
+        setSubmitStatus('error')
+      }
+    })
+    .catch(error => {
+      setSubmitStatus('error')
+      console.error('Error:', error)
+    })
+    .finally(() => {
+      setIsSubmitting(false)
+    })
+  }
+
   const contactInfo = [
     {
       icon: MapPin,
@@ -164,6 +202,7 @@ export default function Contact() {
                 <form 
                   action="https://formspree.io/f/xvzbowoj"
                   method="POST"
+                  onSubmit={handleFormSubmit}
                   className="space-y-6"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
