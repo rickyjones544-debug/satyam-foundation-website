@@ -19,7 +19,7 @@ export default function Contact() {
                 Get in Touch
               </h1>
               <p className="text-xl max-w-3xl mx-auto text-primary-100">
-                Have questions about your products or want to place an order? 
+                Have questions about our products or want to place an order? 
                 Satyam Mushroom by Satyam Foundation Charitable Trust is here to help. Reach out through any of the channels below.
               </p>
             </div>
@@ -173,12 +173,16 @@ export default function Contact() {
       <script dangerouslySetInnerHTML={{
         __html: `
           function sendFormData() {
+            console.log('Button clicked!');
+            
             // Get form data from input fields
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
             const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
+            
+            console.log('Form data:', { name, email, phone, subject, message });
             
             // Validate required fields
             if (!name || !email || !subject || !message) {
@@ -187,7 +191,7 @@ export default function Contact() {
             }
             
             // Show loading state
-            const button = event.target;
+            const button = document.querySelector('button[type="button"]');
             const originalText = button.textContent;
             button.textContent = 'Sending...';
             button.disabled = true;
@@ -200,6 +204,8 @@ export default function Contact() {
             formData.append('subject', subject);
             formData.append('message', message);
             
+            console.log('Sending to Formspree...');
+            
             // Submit to Formspree using fetch
             fetch('https://formspree.io/f/xvzbowoj', {
               method: 'POST',
@@ -210,12 +216,15 @@ export default function Contact() {
             })
             .then(response => {
               console.log('Formspree response:', response);
+              console.log('Response status:', response.status);
+              console.log('Response ok:', response.ok);
               
               // Hide both messages first
               document.getElementById('success-message').classList.add('hidden');
               document.getElementById('error-message').classList.add('hidden');
               
               if (response.ok) {
+                console.log('Success!');
                 // Show success message
                 document.getElementById('success-message').classList.remove('hidden');
                 // Clear all fields
@@ -225,6 +234,7 @@ export default function Contact() {
                 document.getElementById('subject').value = '';
                 document.getElementById('message').value = '';
               } else {
+                console.log('Error!');
                 // Show error message
                 document.getElementById('error-message').classList.remove('hidden');
               }
