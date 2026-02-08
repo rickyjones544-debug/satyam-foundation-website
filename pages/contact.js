@@ -1,7 +1,62 @@
 import Head from 'next/head'
+import { useState } from 'react'
 import { Mail, Phone, MapPin, Clock, Send, MessageSquare } from 'lucide-react'
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: ''
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
+  const [showError, setShowError] = useState(false)
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setShowSuccess(false)
+    setShowError(false)
+
+    try {
+      const response = await fetch('https://formspree.io/f/xvzbowoj', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+
+      if (response.ok) {
+        setShowSuccess(true)
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        })
+      } else {
+        setShowError(true)
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      setShowError(true)
+    }
+
+    setIsSubmitting(false)
+  }
+
   return (
     <>
       <Head>
@@ -34,18 +89,22 @@ export default function Contact() {
               <div>
                 <h2 className="text-3xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
                 
-                {/* Success Message - Always show after form submission */}
-                <div id="success-message" className="hidden mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
-                  Thank you for your inquiry! Our team will get back to you within 24 hours.
-                </div>
+                {/* Success Message */}
+                {showSuccess && (
+                  <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                    Thank you for your inquiry! Our team will get back to you within 24 hours.
+                  </div>
+                )}
                 
-                {/* Error Message - Always show after form submission */}
-                <div id="error-message" className="hidden mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
-                  Sorry, there was an error sending your message. Please try again or call us directly at +91 91222 05301.
-                </div>
+                {/* Error Message */}
+                {showError && (
+                  <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                    Sorry, there was an error sending your message. Please try again or call us directly at +91 91222 05301.
+                  </div>
+                )}
                 
-                {/* Simple div instead of form to prevent any browser submission */}
-                <div className="space-y-6">
+                {/* React Form */}
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -53,7 +112,9 @@ export default function Contact() {
                       </label>
                       <input
                         type="text"
-                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
                         required
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                         placeholder="John Doe"
@@ -66,7 +127,9 @@ export default function Contact() {
                       </label>
                       <input
                         type="email"
-                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         required
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                         placeholder="john@example.com"
@@ -79,7 +142,9 @@ export default function Contact() {
                       </label>
                       <input
                         type="tel"
-                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                         placeholder="+91 91222 05301"
                       />
@@ -90,7 +155,9 @@ export default function Contact() {
                         Subject *
                       </label>
                       <select
-                        id="subject"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
                         required
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                       >
@@ -103,12 +170,14 @@ export default function Contact() {
                       </select>
                     </div>
                     
-                    <div>
+                    <div className="md:col-span-2">
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Message *
                       </label>
                       <textarea
-                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
                         required
                         rows={5}
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
@@ -116,17 +185,17 @@ export default function Contact() {
                       ></textarea>
                     </div>
                     
-                    <div>
+                    <div className="md:col-span-2">
                       <button
-                        type="button"
-                        className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-                        onClick="sendFormData()"
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        Send Message
+                        {isSubmitting ? 'Sending...' : 'Send Message'}
                       </button>
                     </div>
                   </div>
-                </div>
+                </form>
               </div>
 
               {/* Map & Additional Info */}
@@ -169,94 +238,6 @@ export default function Contact() {
           </div>
         </section>
       </div>
-      
-      <script dangerouslySetInnerHTML={{
-        __html: `
-          function sendFormData() {
-            console.log('Button clicked!');
-            
-            // Get form data from input fields
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            console.log('Form data:', { name, email, phone, subject, message });
-            
-            // Validate required fields
-            if (!name || !email || !subject || !message) {
-              alert('Please fill in all required fields.');
-              return;
-            }
-            
-            // Show loading state
-            const button = document.querySelector('button[type="button"]');
-            const originalText = button.textContent;
-            button.textContent = 'Sending...';
-            button.disabled = true;
-            
-            // Create form data
-            const formData = new FormData();
-            formData.append('name', name);
-            formData.append('email', email);
-            formData.append('phone', phone);
-            formData.append('subject', subject);
-            formData.append('message', message);
-            
-            console.log('Sending to Formspree...');
-            
-            // Submit to Formspree using fetch
-            fetch('https://formspree.io/f/xvzbowoj', {
-              method: 'POST',
-              body: formData,
-              headers: {
-                'Accept': 'application/json'
-              }
-            })
-            .then(response => {
-              console.log('Formspree response:', response);
-              console.log('Response status:', response.status);
-              console.log('Response ok:', response.ok);
-              
-              // Hide both messages first
-              document.getElementById('success-message').classList.add('hidden');
-              document.getElementById('error-message').classList.add('hidden');
-              
-              if (response.ok) {
-                console.log('Success!');
-                // Show success message
-                document.getElementById('success-message').classList.remove('hidden');
-                // Clear all fields
-                document.getElementById('name').value = '';
-                document.getElementById('email').value = '';
-                document.getElementById('phone').value = '';
-                document.getElementById('subject').value = '';
-                document.getElementById('message').value = '';
-              } else {
-                console.log('Error!');
-                // Show error message
-                document.getElementById('error-message').classList.remove('hidden');
-              }
-              
-              // Reset button
-              button.textContent = originalText;
-              button.disabled = false;
-            })
-            .catch(error => {
-              console.error('Form submission error:', error);
-              
-              // Show error message
-              document.getElementById('success-message').classList.add('hidden');
-              document.getElementById('error-message').classList.remove('hidden');
-              
-              // Reset button
-              button.textContent = originalText;
-              button.disabled = false;
-            });
-          }
-        `
-      }} />
     </>
   )
 }
