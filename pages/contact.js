@@ -182,34 +182,31 @@ export default function Contact() {
             // Get form data
             const formData = new FormData(event.target);
             
-            // Create a hidden form to submit to Formspree
-            const hiddenForm = document.createElement('form');
-            hiddenForm.action = 'https://formspree.io/f/xvzbowoj';
-            hiddenForm.method = 'POST';
-            hiddenForm.target = '_blank';
-            
-            // Copy all form fields to hidden form
-            for (let [key, value] of formData.entries()) {
-              const input = document.createElement('input');
-              input.type = 'hidden';
-              input.name = key;
-              input.value = value;
-              hiddenForm.appendChild(input);
-            }
-            
-            // Submit the hidden form
-            document.body.appendChild(hiddenForm);
-            hiddenForm.submit();
-            
-            // Remove the hidden form
-            document.body.removeChild(hiddenForm);
-            
-            // Show success message
-            document.getElementById('error-message').classList.add('hidden');
-            document.getElementById('success-message').classList.remove('hidden');
-            
-            // Clear the original form
-            event.target.reset();
+            // Submit to Formspree using fetch to stay on page
+            fetch('https://formspree.io/f/xvzbowoj', {
+              method: 'POST',
+              body: formData,
+              headers: {
+                'Accept': 'application/json'
+              }
+            })
+            .then(response => {
+              console.log('Formspree response:', response);
+              
+              // Show success message
+              document.getElementById('error-message').classList.add('hidden');
+              document.getElementById('success-message').classList.remove('hidden');
+              
+              // Clear the form
+              event.target.reset();
+            })
+            .catch(error => {
+              console.error('Form submission error:', error);
+              
+              // Show error message
+              document.getElementById('success-message').classList.add('hidden');
+              document.getElementById('error-message').classList.remove('hidden');
+            });
           }
         `
       }} />
