@@ -19,7 +19,7 @@ export default function Contact() {
                 Get in Touch
               </h1>
               <p className="text-xl max-w-3xl mx-auto text-primary-100">
-                Have questions about our products or want to place an order? 
+                Have questions about your products or want to place an order? 
                 Satyam Mushroom by Satyam Foundation Charitable Trust is here to help. Reach out through any of the channels below.
               </p>
             </div>
@@ -44,10 +44,8 @@ export default function Contact() {
                   Sorry, there was an error sending your message. Please try again or call us directly at +91 91222 05301.
                 </div>
                 
-                <form 
-                  id="contact-form"
-                  className="space-y-6"
-                >
+                {/* Simple div instead of form to prevent any browser submission */}
+                <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -55,7 +53,7 @@ export default function Contact() {
                       </label>
                       <input
                         type="text"
-                        name="name"
+                        id="name"
                         required
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                         placeholder="John Doe"
@@ -68,7 +66,7 @@ export default function Contact() {
                       </label>
                       <input
                         type="email"
-                        name="email"
+                        id="email"
                         required
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                         placeholder="john@example.com"
@@ -81,7 +79,7 @@ export default function Contact() {
                       </label>
                       <input
                         type="tel"
-                        name="phone"
+                        id="phone"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                         placeholder="+91 91222 05301"
                       />
@@ -92,7 +90,7 @@ export default function Contact() {
                         Subject *
                       </label>
                       <select
-                        name="subject"
+                        id="subject"
                         required
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                       >
@@ -110,7 +108,7 @@ export default function Contact() {
                         Message *
                       </label>
                       <textarea
-                        name="message"
+                        id="message"
                         required
                         rows={5}
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
@@ -122,13 +120,13 @@ export default function Contact() {
                       <button
                         type="button"
                         className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-                        onClick="submitForm()"
+                        onClick="sendFormData()"
                       >
                         Send Message
                       </button>
                     </div>
                   </div>
-                </form>
+                </div>
               </div>
 
               {/* Map & Additional Info */}
@@ -174,49 +172,70 @@ export default function Contact() {
       
       <script dangerouslySetInnerHTML={{
         __html: `
-          function submitForm() {
-            // Get form element
-            const form = document.getElementById('contact-form');
-            const formData = new FormData(form);
+          function sendFormData() {
+            // Get form data from input fields
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Validate required fields
+            if (!name || !email || !subject || !message) {
+              alert('Please fill in all required fields.');
+              return;
+            }
             
             // Show loading state
-            const button = form.querySelector('button[type="button"]');
+            const button = event.target;
             const originalText = button.textContent;
             button.textContent = 'Sending...';
             button.disabled = true;
             
-            // Submit to Formspree using XMLHttpRequest
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'https://formspree.io/f/xvzbowoj', true);
-            xhr.setRequestHeader('Accept', 'application/json');
+            // Create form data
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('email', email);
+            formData.append('phone', phone);
+            formData.append('subject', subject);
+            formData.append('message', message);
             
-            xhr.onreadystatechange = function() {
-              if (xhr.readyState === XMLHttpRequest.DONE) {
-                console.log('Response status:', xhr.status);
-                console.log('Response text:', xhr.responseText);
-                
-                // Hide both messages first
-                document.getElementById('success-message').classList.add('hidden');
-                document.getElementById('error-message').classList.add('hidden');
-                
-                if (xhr.status === 200) {
-                  // Show success message
-                  document.getElementById('success-message').classList.remove('hidden');
-                  // Clear form
-                  form.reset();
-                } else {
-                  // Show error message
-                  document.getElementById('error-message').classList.remove('hidden');
-                }
-                
-                // Reset button
-                button.textContent = originalText;
-                button.disabled = false;
+            // Submit to Formspree using fetch
+            fetch('https://formspree.io/f/xvzbowoj', {
+              method: 'POST',
+              body: formData,
+              headers: {
+                'Accept': 'application/json'
               }
-            };
-            
-            xhr.onerror = function() {
-              console.error('Request failed');
+            })
+            .then(response => {
+              console.log('Formspree response:', response);
+              
+              // Hide both messages first
+              document.getElementById('success-message').classList.add('hidden');
+              document.getElementById('error-message').classList.add('hidden');
+              
+              if (response.ok) {
+                // Show success message
+                document.getElementById('success-message').classList.remove('hidden');
+                // Clear all fields
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('phone').value = '';
+                document.getElementById('subject').value = '';
+                document.getElementById('message').value = '';
+              } else {
+                // Show error message
+                document.getElementById('error-message').classList.remove('hidden');
+              }
+              
+              // Reset button
+              button.textContent = originalText;
+              button.disabled = false;
+            })
+            .catch(error => {
+              console.error('Form submission error:', error);
+              
               // Show error message
               document.getElementById('success-message').classList.add('hidden');
               document.getElementById('error-message').classList.remove('hidden');
@@ -224,10 +243,7 @@ export default function Contact() {
               // Reset button
               button.textContent = originalText;
               button.disabled = false;
-            };
-            
-            // Send the request
-            xhr.send(formData);
+            });
           }
         `
       }} />
