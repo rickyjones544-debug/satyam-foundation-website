@@ -45,10 +45,8 @@ export default function Contact() {
                 </div>
                 
                 <form 
-                  action="https://formspree.io/f/xvzbowoj"
-                  method="POST"
+                  id="contact-form"
                   className="space-y-6"
-                  onSubmit="handleFormSubmit(event)"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -122,8 +120,9 @@ export default function Contact() {
                     
                     <div>
                       <button
-                        type="submit"
+                        type="button"
                         className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                        onClick="submitForm()"
                       >
                         Send Message
                       </button>
@@ -175,38 +174,60 @@ export default function Contact() {
       
       <script dangerouslySetInnerHTML={{
         __html: `
-          function handleFormSubmit(event) {
-            // Prevent default form submission
-            event.preventDefault();
+          function submitForm() {
+            // Get form element
+            const form = document.getElementById('contact-form');
+            const formData = new FormData(form);
             
-            // Get form data
-            const formData = new FormData(event.target);
+            // Show loading state
+            const button = form.querySelector('button[type="button"]');
+            const originalText = button.textContent;
+            button.textContent = 'Sending...';
+            button.disabled = true;
             
-            // Submit to Formspree using fetch to stay on page
-            fetch('https://formspree.io/f/xvzbowoj', {
-              method: 'POST',
-              body: formData,
-              headers: {
-                'Accept': 'application/json'
+            // Submit to Formspree using XMLHttpRequest
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://formspree.io/f/xvzbowoj', true);
+            xhr.setRequestHeader('Accept', 'application/json');
+            
+            xhr.onreadystatechange = function() {
+              if (xhr.readyState === XMLHttpRequest.DONE) {
+                console.log('Response status:', xhr.status);
+                console.log('Response text:', xhr.responseText);
+                
+                // Hide both messages first
+                document.getElementById('success-message').classList.add('hidden');
+                document.getElementById('error-message').classList.add('hidden');
+                
+                if (xhr.status === 200) {
+                  // Show success message
+                  document.getElementById('success-message').classList.remove('hidden');
+                  // Clear form
+                  form.reset();
+                } else {
+                  // Show error message
+                  document.getElementById('error-message').classList.remove('hidden');
+                }
+                
+                // Reset button
+                button.textContent = originalText;
+                button.disabled = false;
               }
-            })
-            .then(response => {
-              console.log('Formspree response:', response);
-              
-              // Show success message
-              document.getElementById('error-message').classList.add('hidden');
-              document.getElementById('success-message').classList.remove('hidden');
-              
-              // Clear the form
-              event.target.reset();
-            })
-            .catch(error => {
-              console.error('Form submission error:', error);
-              
+            };
+            
+            xhr.onerror = function() {
+              console.error('Request failed');
               // Show error message
               document.getElementById('success-message').classList.add('hidden');
               document.getElementById('error-message').classList.remove('hidden');
-            });
+              
+              // Reset button
+              button.textContent = originalText;
+              button.disabled = false;
+            };
+            
+            // Send the request
+            xhr.send(formData);
           }
         `
       }} />
