@@ -47,8 +47,8 @@ export default function Contact() {
                 <form 
                   action="https://formspree.io/f/xvzbowoj"
                   method="POST"
-                  target="_blank"
                   className="space-y-6"
+                  onSubmit="handleFormSubmit(event)"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -124,7 +124,6 @@ export default function Contact() {
                       <button
                         type="submit"
                         className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-                        onClick="showSuccessMessage()"
                       >
                         Send Message
                       </button>
@@ -176,11 +175,41 @@ export default function Contact() {
       
       <script dangerouslySetInnerHTML={{
         __html: `
-          function showSuccessMessage() {
-            // Hide error message
-            document.getElementById('error-message').classList.add('hidden');
+          function handleFormSubmit(event) {
+            // Prevent default form submission
+            event.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(event.target);
+            
+            // Create a hidden form to submit to Formspree
+            const hiddenForm = document.createElement('form');
+            hiddenForm.action = 'https://formspree.io/f/xvzbowoj';
+            hiddenForm.method = 'POST';
+            hiddenForm.target = '_blank';
+            
+            // Copy all form fields to hidden form
+            for (let [key, value] of formData.entries()) {
+              const input = document.createElement('input');
+              input.type = 'hidden';
+              input.name = key;
+              input.value = value;
+              hiddenForm.appendChild(input);
+            }
+            
+            // Submit the hidden form
+            document.body.appendChild(hiddenForm);
+            hiddenForm.submit();
+            
+            // Remove the hidden form
+            document.body.removeChild(hiddenForm);
+            
             // Show success message
+            document.getElementById('error-message').classList.add('hidden');
             document.getElementById('success-message').classList.remove('hidden');
+            
+            // Clear the original form
+            event.target.reset();
           }
         `
       }} />
